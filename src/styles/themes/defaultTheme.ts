@@ -17,6 +17,8 @@ export const defaultTheme = {
   button_text_color: "rgba(225, 225, 230, 1)",
   table_label_text_color: "rgba(225, 225, 230, 1)",
   placeholder_text_color: "rgba(112, 123, 138, 1)",
+  placeholder_underline_color: "rgba(112, 123, 138, 1)",
+  placeholder_underline_color_bright: "rgba(170, 181, 196, 1)",
   counter_text_color: "rgba(168, 187, 215, 1)",
   // General backgrounds
   default_background: "linear-gradient(111.51deg, #4C515B 0%, #2D3137 100%)",
