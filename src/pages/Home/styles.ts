@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.main`
+  margin-top: 6.8rem;
 `;
 
 
@@ -52,6 +53,7 @@ export const CountdownContainer = styled.div`
   align-items: center;
   gap: 1.6rem;
 `;
+
 export const CountdownNumber = styled.span`
   height: 19.8rem;
   width: 12.8rem;
@@ -69,6 +71,7 @@ export const CountdownNumber = styled.span`
   color: ${(props) => props.theme.counter_text_color};
   line-height: 1;
 `;
+
 export const CountdownDots = styled.span`
   width: 8rem;
   padding-bottom: 2rem;
@@ -79,5 +82,4 @@ export const CountdownDots = styled.span`
   font-size: 16rem;
   font-weight: 700;
   color: ${(props) => props.theme.brand_primary};
-
 `;
