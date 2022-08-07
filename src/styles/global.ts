@@ -2,6 +2,9 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   body {
+    padding-top: 8rem;
+    height: 100vh;
+    width: 100vw;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 1.6rem;

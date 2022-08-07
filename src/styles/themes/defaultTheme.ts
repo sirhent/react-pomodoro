@@ -28,4 +28,7 @@ export const defaultTheme = {
   default_neumorphic_fx: "-10px -10px 15px rgba(76, 81, 91, 0.5), -10px -10px 15px #4C515B, 10px 10px 15px rgba(41, 44, 50, 0.5), -30px -30px 55px #4C515B, 25px 25px 55px #292C32, inset 2px 2px 0px rgba(91, 97, 109, 0.5)",
   primary_button_neumorphic_fx: "5px 5px 25px rgba(33, 35, 39, 0.7), -5px -5px 25px rgba(85, 144, 214, 0.35), inset 2px 2px 0px rgba(255, 255, 255, 0.08)",
   stop_button_neumorhic_fx: "5px 5px 25px rgba(56, 15, 18, 0.7), -5px -5px 25px rgba(214, 92, 102, 0.5), inset 2px 2px 0px rgba(255, 255, 255, 0.08)",
+  // Borders
+  border_radius_big: "24px",
+  border_radius_medium: "12px",
 }

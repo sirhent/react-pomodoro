@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
-import { Button } from "./components/Button";
+import { NoiseOverlay } from "./components/NoiseOverlay";
+import { Router } from "./Router";
 
 // styles
 import { GlobalStyle } from "./styles/global";
@@ -8,12 +9,10 @@ import { defaultTheme } from "./styles/themes/defaultTheme";
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
+      <NoiseOverlay />
       <GlobalStyle />
 
-      <Button color="primary" />
-      <Button color="secondary" />
-      <Button color="success" />
-      <Button color="danger" />
+      <Router />
     </ThemeProvider>
   );
 }
