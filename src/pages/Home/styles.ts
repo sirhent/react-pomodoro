@@ -18,6 +18,8 @@ export const FormContainer = styled.form`
 export const FormGroup = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 0.8rem;
 `;
 
@@ -28,7 +30,6 @@ export const FormLabel = styled.label`
 
 export const FormInput = styled.input`
   padding: 1rem;
-  width: min-content;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid ${(props) => props.theme.placeholder_underline_color};
@@ -72,6 +73,9 @@ export const CountdownNumber = styled.span`
   font-weight: 100;
   color: ${(props) => props.theme.counter_text_color};
   line-height: 1;
+
+  pointer-events: none;
+  user-select: none;
 `;
 
 export const CountdownDots = styled.span`
@@ -84,4 +88,7 @@ export const CountdownDots = styled.span`
   font-size: 16rem;
   font-weight: 700;
   color: ${(props) => props.theme.brand_primary};
+
+  pointer-events: none;
+  user-select: none;
 `;

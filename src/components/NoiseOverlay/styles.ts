@@ -3,7 +3,7 @@ import styled from "styled-components";
 import noiseImage from "../../assets/images/misc/Rectangle-noise.png";
 
 export const NoiseOverlayContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
