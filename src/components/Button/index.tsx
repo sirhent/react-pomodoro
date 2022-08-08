@@ -1,16 +1,61 @@
-import { Play } from "phosphor-react";
-import { ButtonContainer } from "./styles";
+import { Play, StopCircle } from "phosphor-react";
+import { ButtonDefault, ButtonStop } from "./styles";
 
 interface ButtonProps {
   text: string;
   variant: "primary" | "stop";
+  icon?: "Play" | "StopCircle";
+  type: "button" | "reset" | "submit";
+  title: string;
+  disabled?: boolean;
 }
 
 export function Button(props: ButtonProps) {
-  return (
-    <ButtonContainer>
-      <Play weight="fill" size={20} />
-      {props.text}
-    </ButtonContainer>
-  );
+  function renderIcon() {
+    switch (props.icon) {
+      case "Play":
+        return (
+          <Play weight="fill" size={20} />
+        );
+      case "StopCircle":
+        return (
+          <StopCircle weight="fill" size={20} />
+        );
+
+      default:
+        return;
+    }
+  }
+
+  function renderButtonVariant() {
+    const buttonProps = {
+      disabled: props.disabled ? props.disabled : false,
+      type: props.type,
+      title: props.title
+    }
+
+    switch (props.variant) {
+      case "stop":
+        return (
+          <ButtonStop 
+            {...buttonProps}
+          >
+            {props.icon && renderIcon()}
+            {props.text}
+          </ButtonStop>
+        );
+
+      default:
+        return (
+          <ButtonDefault 
+            {...buttonProps}
+          >
+            {props.icon && renderIcon()}
+            {props.text}
+          </ButtonDefault>
+        );
+    }
+  }
+
+  return renderButtonVariant();
 }

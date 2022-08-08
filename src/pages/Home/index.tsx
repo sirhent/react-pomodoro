@@ -35,7 +35,11 @@ export function Home() {
         
         <Button 
           text="Iniciar" 
+          title="Iniciar contador"
           variant="primary"
+          icon="Play"
+          type="submit"
+          disabled={false}
         />
       </FormContainer>
     </HomeContainer>
