@@ -1,5 +1,5 @@
 import { Button } from "../../components/Button";
-import { CountdownContainer, CountdownDots, CountdownNumber, FormContainer, FormGroup, FormInput, FormLabel, FormSpan, HomeContainer } from "./styles";
+import { CountdownContainer, CountdownDots, CountdownNumber, FormContainer, FormGroup, FormLabel, FormSpan, HomeContainer, MinutesInput, TaskInput } from "./styles";
 
 export function Home() {
   return (
@@ -7,18 +7,29 @@ export function Home() {
       <FormContainer action="">
         <FormGroup>
           <FormLabel htmlFor="task">Vou trabalhar em</FormLabel>
-          <FormInput 
+          <TaskInput 
             id="task"
             type="text"
-            placeholder="Dê um nome para o seu projeto">
-          </FormInput>
+            placeholder="Dê um nome para o seu projeto"
+            list="taskSuggestions">
+          </TaskInput>
+
+          <datalist id="taskSuggestions">
+            <option value="Projeto 1" />
+            <option value="Projeto 2" />
+            <option value="Projeto 3" />
+            <option value="Projeto 4" />
+          </datalist>
 
           <FormLabel htmlFor="amountOfMinutes">durante</FormLabel>
-          <FormInput 
+          <MinutesInput 
             id="amountOfMinutes" 
             type="number"
-            placeholder="00">
-          </FormInput>
+            placeholder="00"
+            step={5}
+            min={5}
+            max={60}>
+          </MinutesInput>
 
           <FormSpan>minutos.</FormSpan>
         </FormGroup>

@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 1.6rem;
     color: ${props => props.theme.text_color};
-    -webkit-font-smoothing: antialiased;
 
     background: ${props => props.theme.default_background};
   }
