@@ -1,4 +1,4 @@
-import { HistoryContainer, HistoryList, HistoryTitle } from "./styles";
+import { HistoryContainer, HistoryList, HistoryTitle, TaskStatus } from "./styles";
 
 export function History() {
   return (
@@ -21,7 +21,73 @@ export function History() {
               <td>Tarefa</td>
               <td>20 minutos</td>
               <td>Há 2 meses</td>
-              <td>Concluído</td>
+              <td>
+                <TaskStatus statusColor="yellow">Em andamento</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="green">Concluído</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="red">Interrompido</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="green">Concluído</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="red">Interrompido</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="green">Concluído</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="green">Concluído</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="green">Concluído</TaskStatus>
+              </td>
+            </tr>
+            <tr>
+              <td>Tarefa</td>
+              <td>20 minutos</td>
+              <td>Há 2 meses</td>
+              <td>
+                <TaskStatus statusColor="red">Interrompido</TaskStatus>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/defaultTheme";
 
 export const HistoryContainer = styled.main`
   padding-left: 9.5rem;
@@ -18,7 +19,8 @@ export const HistoryTitle = styled.h1`
 
 export const HistoryList = styled.div`
   width: 100%;
-  overflow: auto;
+  max-height: 40rem;
+  overflow: hidden;
 
   table {
     width: 100%;
@@ -67,5 +69,30 @@ export const HistoryList = styled.div`
         border-bottom-right-radius: 12px;
       }
     }
+  }
+`;
+
+const STATUS_COLORS = {
+  yellow: "warning_color",
+  green: "success_color",
+  red: "danger_color",
+} as const
+
+interface TaskStatusProps {
+  statusColor: keyof typeof STATUS_COLORS;
+}
+
+export const TaskStatus = styled.span<TaskStatusProps>`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 100px;
+
+    background-color: ${(props) => props.theme[STATUS_COLORS[props.statusColor]]};
   }
 `;
