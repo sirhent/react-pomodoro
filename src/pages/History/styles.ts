@@ -26,7 +26,7 @@ export const HistoryList = styled.div`
     width: 100%;
     border-collapse: collapse;
     min-width: 600px;
-    border-spacing: 0 10px;
+    border-spacing: 0 4px;
     border-collapse: separate;
 
     th {
