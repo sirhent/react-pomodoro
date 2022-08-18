@@ -1,18 +1,44 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
+
 import { Button } from "../../components/Button";
 import { CountdownContainer, CountdownDots, CountdownNumber, FormContainer, FormGroup, FormLabel, FormSpan, HomeContainer, MinutesInput, TaskInput } from "./styles";
 
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, "Informe a tarefa"),
+  amountOfMinutes: zod
+      .number()
+      .min(1, "O intervalo precisa ser de no mínimo 5 minutos.")
+      .max(60, "O intervalo precisa ser de no máximo 60 minutos."),
+});
+
 export function Home() {
+  const { register, handleSubmit, watch, formState } = useForm({
+    resolver: zodResolver(newCycleFormValidationSchema),
+  });
+ 
+  function handleCreateNewCycle(data: any) {
+    console.log(data);
+  }
+
+  console.log(formState.errors);
+
+  const task = watch("task");
+  const isSubmitDisabled = !task;
+
   return (
     <HomeContainer>
-      <FormContainer action="">
+      <FormContainer onSubmit={handleSubmit(handleCreateNewCycle)} action="">
         <FormGroup>
           <FormLabel htmlFor="task">Vou trabalhar em</FormLabel>
           <TaskInput 
             id="task"
             type="text"
             placeholder="Dê um nome para o seu projeto"
-            list="taskSuggestions">
-          </TaskInput>
+            list="taskSuggestions"
+            {...register("task")}
+          />
 
           <datalist id="taskSuggestions">
             <option value="Projeto 1" />
@@ -28,7 +54,7 @@ export function Home() {
             placeholder="00"
             step={5}
             min={5}
-            max={60}>
+            {...register("amountOfMinutes", { valueAsNumber: true })}>
           </MinutesInput>
 
           <FormSpan>minutos.</FormSpan>
@@ -50,7 +76,7 @@ export function Home() {
           variant="primary"
           icon="Play"
           type="submit"
-          disabled={false}
+          disabled={isSubmitDisabled}
         />
       </FormContainer>
     </HomeContainer>
