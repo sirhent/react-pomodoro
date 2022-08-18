@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { defaultTheme } from "../../styles/themes/defaultTheme";
 
 export const HistoryContainer = styled.main`
   padding-left: 9.5rem;
