@@ -4,6 +4,7 @@ import * as zod from "zod";
 
 import { Button } from "../../components/Button";
 import { CountdownContainer, CountdownDots, CountdownNumber, FormContainer, FormGroup, FormLabel, FormSpan, HomeContainer, MinutesInput, TaskInput } from "./styles";
+import { useState } from "react";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa"),
@@ -20,7 +21,16 @@ const newCycleFormValidationSchema = zod.object({
 
 type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>;
 
+interface Cycle {
+  id: string;
+  task: string;
+  amountOfMinutes: number;
+}
+
 export function Home() {
+  const [cycles, setCycles] = useState<Cycle[]>([]);
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+
   const { register, handleSubmit, watch, formState, reset } = 
       useForm<NewCycleFormData>({
         resolver: zodResolver(newCycleFormValidationSchema),
@@ -31,11 +41,23 @@ export function Home() {
       });
  
   function handleCreateNewCycle(data: NewCycleFormData) {
-    console.log(data);
+    const cycleId = String(new Date().getTime());
+
+    const newCycle: Cycle = {
+      id: cycleId,
+      task: data.task,
+      amountOfMinutes: data.amountOfMinutes,
+    }
+
+    setCycles((state) => [...state, newCycle]);
+    setActiveCycleId(cycleId);
+
     reset();
   }
 
-  console.log(formState.errors);
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
+
+  console.log(activeCycle);
 
   const task = watch("task");
   const isSubmitDisabled = !task;
