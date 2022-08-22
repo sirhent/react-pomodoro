@@ -8,6 +8,7 @@ interface ButtonProps {
   type: "button" | "reset" | "submit";
   title: string;
   disabled?: boolean;
+  onClick: () => void;
 }
 
 export function Button(props: ButtonProps) {
@@ -31,7 +32,8 @@ export function Button(props: ButtonProps) {
     const buttonProps = {
       disabled: props.disabled ? props.disabled : false,
       type: props.type,
-      title: props.title
+      title: props.title,
+      onClick: props.onClick
     }
 
     switch (props.variant) {

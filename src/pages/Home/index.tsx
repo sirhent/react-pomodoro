@@ -27,6 +27,7 @@ interface Cycle {
   task: string;
   amountOfMinutes: number;
   startedAt: Date;
+  interruptedAt?: Date; 
 }
 
 export function Home() {
@@ -77,6 +78,18 @@ export function Home() {
     reset();
   }
 
+  function handleInterruptCycle() {
+    setCycles(cycles.map((cycle) => {
+      if (cycle.id === activeCycleId)  {
+        return { ...cycle, interruptedAt: new Date() };
+      } else {
+        return cycle;
+      }
+    }));
+
+    setActiveCycleId(null);
+  }
+
   const totalSeconds = activeCycle ? activeCycle.amountOfMinutes * 60 : 0;
   const currentSeconds = activeCycle ? totalSeconds - elapsedSeconds : 0;
 
@@ -105,6 +118,7 @@ export function Home() {
             type="text"
             placeholder="Dê um nome para o seu projeto"
             list="taskSuggestions"
+            disabled={!!activeCycle}
             {...register("task")}
           />
 
@@ -122,6 +136,7 @@ export function Home() {
             placeholder="00"
             step={5}
             min={5}
+            disabled={!!activeCycle}
             {...register("amountOfMinutes", { valueAsNumber: true })}>
           </MinutesInput>
 
@@ -138,14 +153,26 @@ export function Home() {
           <CountdownNumber>{secondsToDisplay[1]}</CountdownNumber>
         </CountdownContainer>
         
-        <Button 
-          text="Iniciar" 
-          title="Iniciar contador"
-          variant="primary"
-          icon="Play"
-          type="submit"
-          disabled={isSubmitDisabled}
-        />
+        { activeCycle ? (
+          <Button 
+            onClick={handleInterruptCycle}
+            text="Interromper" 
+            title="Interromper contador"
+            variant="stop"
+            icon="StopCircle"
+            type="submit"
+            disabled={false}
+          />
+        ) : (
+          <Button 
+            text="Iniciar" 
+            title="Iniciar contador"
+            variant="primary"
+            icon="Play"
+            type="submit"
+            disabled={isSubmitDisabled}
+          />
+        )}
       </FormContainer>
     </HomeContainer>
   );
