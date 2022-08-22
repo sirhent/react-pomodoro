@@ -30,6 +30,7 @@ interface Cycle {
 export function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([]);
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   const { register, handleSubmit, watch, formState, reset } = 
       useForm<NewCycleFormData>({
@@ -57,7 +58,14 @@ export function Home() {
 
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
-  console.log(activeCycle);
+  const totalSeconds = activeCycle ? activeCycle.amountOfMinutes * 60 : 0;
+  const currentSeconds = activeCycle ? totalSeconds - elapsedSeconds : 0;
+
+  const minutesCount = Math.floor(currentSeconds / 60);
+  const secondsCount = currentSeconds % 60;
+
+  const minutesToDisplay = String(minutesCount).padStart(2, "0");
+  const secondsToDisplay = String(secondsCount).padStart(2, "0");
 
   const task = watch("task");
   const isSubmitDisabled = !task;
@@ -96,13 +104,13 @@ export function Home() {
         </FormGroup>
 
         <CountdownContainer>
-          <CountdownNumber>0</CountdownNumber>
-          <CountdownNumber>0</CountdownNumber>
+          <CountdownNumber>{minutesToDisplay[0]}</CountdownNumber>
+          <CountdownNumber>{minutesToDisplay[1]}</CountdownNumber>
 
           <CountdownDots>:</CountdownDots>
 
-          <CountdownNumber>0</CountdownNumber>
-          <CountdownNumber>0</CountdownNumber>
+          <CountdownNumber>{secondsToDisplay[0]}</CountdownNumber>
+          <CountdownNumber>{secondsToDisplay[1]}</CountdownNumber>
         </CountdownContainer>
         
         <Button 
