@@ -46,13 +46,19 @@ export function Home() {
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
   useEffect(() => {
+    let cycleInterval: number;
+
     if (activeCycle) {
-      setInterval(() => {
+      cycleInterval = setInterval(() => {
         setElapsedSeconds(
             differenceInSeconds(new Date(), activeCycle.startedAt)
         );
       }, 1000);
     }
+
+    return () => {
+      clearInterval(cycleInterval);
+    };
   }, [activeCycle]);
  
   function handleCreateNewCycle(data: NewCycleFormData) {
@@ -79,6 +85,12 @@ export function Home() {
 
   const minutesToDisplay = String(minutesCount).padStart(2, "0");
   const secondsToDisplay = String(secondsCount).padStart(2, "0");
+
+  useEffect(() => {
+    if (activeCycle) {
+      document.title = `${minutesToDisplay}:${secondsToDisplay}`;
+    }
+  }, [minutesToDisplay, secondsToDisplay, activeCycle]);
 
   const task = watch("task");
   const isSubmitDisabled = !task;
