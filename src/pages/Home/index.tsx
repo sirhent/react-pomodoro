@@ -28,6 +28,7 @@ interface Cycle {
   amountOfMinutes: number;
   startedAt: Date;
   interruptedAt?: Date; 
+  finishedAt?: Date;
 }
 
 export function Home() {
@@ -46,21 +47,41 @@ export function Home() {
 
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
+  const totalSeconds = activeCycle ? activeCycle.amountOfMinutes * 60 : 0;
+
   useEffect(() => {
     let cycleInterval: number;
 
     if (activeCycle) {
       cycleInterval = setInterval(() => {
-        setElapsedSeconds(
-            differenceInSeconds(new Date(), activeCycle.startedAt)
+        const secondsDifference = differenceInSeconds(
+            new Date(), 
+            activeCycle.startedAt
         );
+
+        if (secondsDifference >= totalSeconds) {
+          setCycles((state) => {
+            return state.map((cycle) => {
+              if (cycle.id === activeCycleId)  {
+                return { ...cycle, interruptedAt: new Date() };
+              } else {
+                return cycle;
+              }
+            });
+          });
+
+          setElapsedSeconds(totalSeconds);
+          clearInterval(cycleInterval);
+        } else {
+          setElapsedSeconds(secondsDifference);
+        }
       }, 1000);
     }
 
     return () => {
       clearInterval(cycleInterval);
     };
-  }, [activeCycle]);
+  }, [activeCycle, totalSeconds, activeCycleId]);
  
   function handleCreateNewCycle(data: NewCycleFormData) {
     const cycleId = String(new Date().getTime());
@@ -79,18 +100,19 @@ export function Home() {
   }
 
   function handleInterruptCycle() {
-    setCycles(cycles.map((cycle) => {
-      if (cycle.id === activeCycleId)  {
-        return { ...cycle, interruptedAt: new Date() };
-      } else {
-        return cycle;
-      }
-    }));
+    setCycles((state) => { 
+      return state.map((cycle) => {
+        if (cycle.id === activeCycleId)  {
+          return { ...cycle, interruptedAt: new Date() };
+        } else {
+          return cycle;
+        }
+      });
+    });
 
     setActiveCycleId(null);
   }
 
-  const totalSeconds = activeCycle ? activeCycle.amountOfMinutes * 60 : 0;
   const currentSeconds = activeCycle ? totalSeconds - elapsedSeconds : 0;
 
   const minutesCount = Math.floor(currentSeconds / 60);
@@ -135,7 +157,7 @@ export function Home() {
             type="number"
             placeholder="00"
             step={5}
-            min={5}
+            min={1}
             disabled={!!activeCycle}
             {...register("amountOfMinutes", { valueAsNumber: true })}>
           </MinutesInput>
