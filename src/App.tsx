@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { NoiseOverlay } from "./components/NoiseOverlay";
+import { CyclesContextProvider } from "./contexts/CyclesContext";
 import { Router } from "./Router";
 
 // styles
@@ -15,7 +16,10 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <NoiseOverlay />
       <GlobalStyle />
-      <Router />
+
+      <CyclesContextProvider>
+        <Router />
+      </CyclesContextProvider>
     </ThemeProvider>
   );
 }

@@ -1,10 +1,7 @@
 import { FormGroup, FormLabel, FormSpan, MinutesInput, TaskInput } from "./styles";
-// import { useForm } from "react-hook-form";
 import { useContext } from "react";
-import { CyclesContext } from "..";
 import { useFormContext } from "react-hook-form";
-// import * as zod from "zod";
-// import { zodResolver } from "@hookform/resolvers/zod";
+import { CyclesContext } from "../../../contexts/CyclesContext";
 
 // interface NewCycleFormData {
 //   task: string;
@@ -40,7 +37,7 @@ export function NewCycleForm() {
         type="number"
         placeholder="00"
         step={5}
-        min={1}
+        min={5}
         disabled={!!activeCycle}
         {...register("amountOfMinutes", { valueAsNumber: true })}>
       </MinutesInput>
