@@ -8,13 +8,12 @@ import { FormContainer, HomeContainer } from "./styles";
 import { NewCycleForm } from "./NewCycleForm";
 import { Countdown } from "./Countdown";
 
-
 interface Cycle {
   id: string;
   task: string;
   amountOfMinutes: number;
   startedAt: Date;
-  interruptedAt?: Date; 
+  interruptedAt?: Date;
   finishedAt?: Date;
 }
 

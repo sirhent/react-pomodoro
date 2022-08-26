@@ -6,12 +6,10 @@ import { useFormContext } from "react-hook-form";
 // import * as zod from "zod";
 // import { zodResolver } from "@hookform/resolvers/zod";
 
-
 // interface NewCycleFormData {
 //   task: string;
 //   amountOfMinutes: number;
 // }
-
 
 export function NewCycleForm() {
   const { activeCycle } = useContext(CyclesContext);
@@ -20,7 +18,7 @@ export function NewCycleForm() {
   return (
     <FormGroup>
       <FormLabel htmlFor="task">Vou trabalhar em</FormLabel>
-      <TaskInput 
+      <TaskInput
         id="task"
         type="text"
         placeholder="Dê um nome para o seu projeto"
@@ -37,8 +35,8 @@ export function NewCycleForm() {
       </datalist>
 
       <FormLabel htmlFor="amountOfMinutes">durante</FormLabel>
-      <MinutesInput 
-        id="amountOfMinutes" 
+      <MinutesInput
+        id="amountOfMinutes"
         type="number"
         placeholder="00"
         step={5}
