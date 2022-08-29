@@ -21,78 +21,28 @@ export function History() {
           </thead>
 
           <tbody>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="yellow">Em andamento</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="green">Concluído</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="red">Interrompido</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="green">Concluído</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="red">Interrompido</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="green">Concluído</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="green">Concluído</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="green">Concluído</TaskStatus>
-              </td>
-            </tr>
-            <tr>
-              <td>Tarefa</td>
-              <td>20 minutos</td>
-              <td>Há 2 meses</td>
-              <td>
-                <TaskStatus statusColor="red">Interrompido</TaskStatus>
-              </td>
-            </tr>
+            {cycles.map((cycle) => {
+              return (
+                <tr key={cycle.id}>
+                  <td>{cycle.task}</td>
+                  <td>{cycle.amountOfMinutes} minutos</td>
+                  <td>{cycle.startedAt.toISOString()}</td>
+                  <td>
+                    {cycle.finishedAt && (
+                      <TaskStatus statusColor="green">Concluído</TaskStatus>
+                    )}
+
+                    {cycle.interruptedAt && (
+                      <TaskStatus statusColor="red">Interrompido</TaskStatus>
+                    )}
+
+                    {(!cycle.finishedAt && !cycle.interruptedAt) && (
+                      <TaskStatus statusColor="yellow">Em andamento</TaskStatus>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </HistoryList>
