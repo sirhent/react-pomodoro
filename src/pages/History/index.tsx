@@ -49,7 +49,7 @@ export function History() {
                   </td>
                 </tr>
               );
-            })}
+            }).reverse()}
           </tbody>
         </table>
       </HistoryList>
