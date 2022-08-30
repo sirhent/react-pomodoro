@@ -31,17 +31,46 @@ interface CyclesContextProviderProps {
   children: ReactNode;
 }
 
+interface CyclesState {
+  cycles: Cycle[];
+  activeCycleId: string | null;
+}
+
 export function CyclesContextProvider(props: CyclesContextProviderProps) {
-  const [cycles, dispatch] = useReducer((state: Cycle[], action: any) => {
+  const [cyclesState, dispatch] = useReducer((state: CyclesState, action: any) => {
     if (action.type === "ADD_NEW_CYCLE") {
-      return [...state, action.payload.newCycle];
+      console.log(action);
+      return {
+        ...state,
+        cycles: [...state.cycles, action.payload.newCycle],
+        activeCycleId: action.payload.newCycle.id,
+      };
+    }
+
+    if (action.type === "INTERRUPT_CURRENT_CYCLE") {
+      return {
+        ...state,
+        cycles: state.cycles.map((cycle) => {
+          if (cycle.id === state.activeCycleId) {
+            return { ...cycle, interruptedAt: new Date() };
+          } else {
+            return cycle;
+          }
+        }),
+        activeCycleId: null,
+      }
     }
 
     return state;
-  }, []);
+  }, {
+    cycles: [],
+    activeCycleId: null,
+  });
 
-  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+  // const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+
+  const { cycles, activeCycleId } = cyclesState;
 
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
@@ -78,15 +107,18 @@ export function CyclesContextProvider(props: CyclesContextProviderProps) {
       startedAt: new Date(),
     }
 
+    console.log(newCycle);
+
     dispatch({
       type: "ADD_NEW_CYCLE",
       payload: {
-        data: newCycle,
+        newCycle,
       },
     });
 
     // setCycles((state) => [...state, newCycle]);
-    setActiveCycleId(cycleId);
+    // setActiveCycleId(cycleId);
+
     setElapsedSeconds(0);
   }
 
@@ -108,7 +140,7 @@ export function CyclesContextProvider(props: CyclesContextProviderProps) {
     //   });
     // });
 
-    setActiveCycleId(null);
+    // setActiveCycleId(null);
   }
 
   return (
