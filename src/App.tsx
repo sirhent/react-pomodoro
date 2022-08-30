@@ -7,11 +7,7 @@ import { Router } from "./Router";
 import { GlobalStyle } from "./styles/global";
 import { defaultTheme } from "./styles/themes/defaultTheme";
 
-// import { ContextExample } from "./ContextExample";
-
 export function App() {
-  // return <ContextExample />
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <NoiseOverlay />
