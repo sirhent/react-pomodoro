@@ -58,7 +58,7 @@ export const HistoryList = styled.div`
       color: ${(props) => props.theme.text_color};
 
       &:first-child {
-        width: 50%;
+        width: 40%;
         border-top-left-radius: 12px;
         border-bottom-left-radius: 12px;
       }
